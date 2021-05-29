@@ -254,11 +254,7 @@ namespace calculator
 
             return outputing;
         }
-        public void removeBackSlash()
-        {
-
-
-        }
+        
     }
     public class Exclusion : Exception
     {
