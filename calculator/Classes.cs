@@ -82,7 +82,7 @@ namespace calculator
                     }
                 }
                 try { return temp.Peek(); }
-                catch (Exception) { throw new SyntaxExclusion(); }
+                catch (Exception) { Exclusion SyntaxExclusion = new Exclusion();  SyntaxExclusion.SyntaxExclusion(); return 0; }
 
             }
 
@@ -117,9 +117,9 @@ namespace calculator
 
                 case "tg": if (Math.Abs(param % (2 * Math.PI)) == (Math.PI / 2)) { Exclusion TgExclusion = new Exclusion(); return TgExclusion.TgExclusion(param); } else return Math.Tan(param).ToString();
 
-                case "asin": if (param < -1 || param > 1) throw new ArcSinCosExclusion(param); else return Math.Asin(param).ToString();
+                case "asin": if (param < -1 || param > 1) { Exclusion ArcSinCosExclusion = new Exclusion(); return ArcSinCosExclusion.ArcSinCosExclusion(param); } else return Math.Asin(param).ToString();
 
-                case "acos": if (param < -1 || param > 1) throw new ArcSinCosExclusion(param); else return Math.Acos(param).ToString();
+                case "acos": if (param < -1 || param > 1) { Exclusion ArcSinCosExclusion = new Exclusion(); return ArcSinCosExclusion.ArcSinCosExclusion(param); } else return Math.Acos(param).ToString();
 
                 case "atg": return Math.Atan(param).ToString();
 
@@ -295,26 +295,26 @@ namespace calculator
             MessageBox.Show("Log(" + x + ") не існує", type, MessageBoxButtons.OK);
             return "Математична помилка";
         }
-    }
-
-
-
-
-
-    public class SyntaxExclusion : Exclusion
-    {
-        public SyntaxExclusion()
+        public string SyntaxExclusion()
         {
             this.type = "Синтаксична помилка";
             MessageBox.Show("Ви зробили помилку", type, MessageBoxButtons.OK);
+            return "Синтаксична помилка";
         }
-    }
-    public class ArcSinCosExclusion : Exclusion
-    {
-        public ArcSinCosExclusion(double x)
+
+        public string ArcSinCosExclusion(double x)
         {
             this.type = "Математична помилка";
             MessageBox.Show("Acos(або Asin) (" + x + ") не існує", type, MessageBoxButtons.OK);
+            return "Математична помилка";
         }
+
     }
+
+
+
+
+
+    
+    
 }
