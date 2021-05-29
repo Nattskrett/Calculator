@@ -115,7 +115,7 @@ namespace calculator
 
                 case "sin": return Math.Sin(param).ToString();
 
-                case "tg": if (Math.Abs(param % (2 * Math.PI)) == (Math.PI / 2)) throw new TgExclusion(param); else return Math.Tan(param).ToString();
+                case "tg": if (Math.Abs(param % (2 * Math.PI)) == (Math.PI / 2)) {  Exclusion TgExclusion = new Exclusion(); return TgExclusion.TgExclusion(param); } else return Math.Tan(param).ToString();
                 
                 case "asin": if (param < -1 || param > 1) throw new ArcSinCosExclusion(param); else return Math.Asin(param).ToString();
                 
@@ -269,16 +269,16 @@ namespace calculator
             MessageBox.Show("Факторіал(" + x + ") не існує", type, MessageBoxButtons.OK);
         }
 
-    }
-    
-    public class TgExclusion : Exclusion
-    {
-        public TgExclusion(double x)
+        public string TgExclusion(double x)
         {
             this.type = "Математична помилка";
             MessageBox.Show("Tg(" + x + ") не існує", type, MessageBoxButtons.OK);
+            return "Математична помилка";
         }
+
     }
+    
+    
     public class SqrtExclusion : Exclusion
     {
         public SqrtExclusion(double x)
