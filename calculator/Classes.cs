@@ -253,6 +253,7 @@ namespace calculator
                 outputing += operStack1.Pop() + " ";
 
             return outputing;
+
         }
         
     }
