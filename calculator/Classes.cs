@@ -76,7 +76,7 @@ namespace calculator
                             case '+': result = b + a; break;
                             case '-': result = b - a; break;
                             case '*': result = b * a; break;
-                            case '/': if (a == 0) throw new DividedByZeroExclusion(); else result = b / a; break;
+                            case '/': if (a == 0) { Exclusion DividedByZeroExclusion = new Exclusion();  DividedByZeroExclusion.DividedByZeroExclusion();} else result = b / a; break;
                         }
                         temp.Push(result);
                     }
@@ -281,20 +281,19 @@ namespace calculator
             MessageBox.Show("Корінь(" + x + ") не існує", type, MessageBoxButtons.OK);
             return "Математична помилка";
         }
-        
+
+        public void DividedByZeroExclusion()
+        {
+            this.type = "Математична помилка";
+            MessageBox.Show("Ділення на 0 неможливе", type, MessageBoxButtons.OK);
+
+        }
 
     }
     
     
     
-    public class DividedByZeroExclusion : Exclusion
-    {
-        public DividedByZeroExclusion()
-        {
-            this.type = "Математична помилка";
-            MessageBox.Show("Ділення на 0 неможливе", type, MessageBoxButtons.OK);
-        }
-    }
+    
     public class LogExclusion : Exclusion
     {
         public LogExclusion(double x)
