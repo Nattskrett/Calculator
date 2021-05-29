@@ -310,11 +310,19 @@ namespace calculator
         }
 
     }
+    public class SyntaxExclusion : Exclusion
+    {
+        public SyntaxExclusion()
+        {
+            this.type = "Синтаксична помилка";
+            MessageBox.Show("Ви зробили помилку", type, MessageBoxButtons.OK);
+        }
+    }
 
 
 
 
 
-    
-    
+
+
 }
