@@ -123,7 +123,7 @@ namespace calculator
                 
                 case "atg": return Math.Atan(param).ToString();
                 
-                case "sqrt": if (param < 0) throw new SqrtExclusion(param); else return Math.Sqrt(param).ToString();
+                case "sqrt": if (param < 0) { Exclusion SqrtExclusion = new Exclusion(); return SqrtExclusion.SqrtExclusion(param);  } else return Math.Sqrt(param).ToString();
                 
                 case "ln": if (param <= 0) throw new LogExclusion(param); else return Math.Log(param).ToString();
                 
@@ -275,18 +275,18 @@ namespace calculator
             MessageBox.Show("Tg(" + x + ") не існує", type, MessageBoxButtons.OK);
             return "Математична помилка";
         }
+        public string SqrtExclusion(double x)
+        {
+            this.type = "Математична помилка";
+            MessageBox.Show("Корінь(" + x + ") не існує", type, MessageBoxButtons.OK);
+            return "Математична помилка";
+        }
+        
 
     }
     
     
-    public class SqrtExclusion : Exclusion
-    {
-        public SqrtExclusion(double x)
-        {
-            this.type = "Математична помилка";
-            MessageBox.Show("Корінь(" + x + ") не існує", type, MessageBoxButtons.OK);
-        }
-    }
+    
     public class DividedByZeroExclusion : Exclusion
     {
         public DividedByZeroExclusion()
