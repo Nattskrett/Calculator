@@ -152,7 +152,11 @@ namespace calculator
             int i = 1;
             for (int s = 1; s <= x; s++)
                 i = i * s;
-            if (x < 0) throw new NegativeFactorialExclusion(x);
+            if (x < 0) {
+                Exclusion FactorialExclusion = new Exclusion();
+                FactorialExclusion.NegativeFactorialExclusion(x);
+            }
+             
             return i;
         }
         static private string ExpressionGet(string input)
@@ -259,17 +263,14 @@ namespace calculator
     {
         public string type;
 
-
-
-    }
-    public class NegativeFactorialExclusion : Exclusion
-    {
-        public NegativeFactorialExclusion(int x)
+        public void NegativeFactorialExclusion(int x)
         {
             this.type = "Математична помилка";
             MessageBox.Show("Факторіал(" + x + ") не існує", type, MessageBoxButtons.OK);
         }
+
     }
+    
     public class TgExclusion : Exclusion
     {
         public TgExclusion(double x)
