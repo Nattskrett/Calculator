@@ -259,6 +259,8 @@ namespace calculator
     {
         public string type;
 
+
+
     }
     public class NegativeFactorialExclusion : Exclusion
     {
