@@ -82,7 +82,7 @@ namespace calculator
                     }
                 }
                 try { return temp.Peek(); }
-                catch (Exception) { Exclusion SyntaxExclusion = new Exclusion();  SyntaxExclusion.SyntaxExclusion(); return 0; }
+                catch (Exception) { throw new SyntaxExclusion(); }
 
             }
 
