@@ -30,36 +30,36 @@ namespace calculator
                 return true;
             return false;
         }
-        
+
 
         static private double Count(string input)
         {
             double result = 0;
             double b = 0;
-            Stack<double> temp = new Stack<double>(); 
+            Stack<double> temp = new Stack<double>();
             try { return double.Parse(input); }
             catch (Exception)
             {
-                for (int i = 0; i < input.Length; i++) 
+                for (int i = 0; i < input.Length; i++)
                 {
                     if (Char.IsDigit(input[i]))
                     {
                         string a = string.Empty;
 
-                        while (!IsDelimeter(input[i]) && !IsOperator(input[i])) 
+                        while (!IsDelimeter(input[i]) && !IsOperator(input[i]))
                         {
                             a += input[i];
                             i++;
                             if (i == input.Length) break;
                         }
-                        temp.Push(double.Parse(a)); 
+                        temp.Push(double.Parse(a));
                         i--;
                     }
                     else if (input[i] == '\u03C0')
                         temp.Push(Math.PI);
                     else if (input[i] == 'e')
                         temp.Push(Math.E);
-                    else if (IsOperator(input[i])) 
+                    else if (IsOperator(input[i]))
                     {
                         double a = temp.Pop();
                         try
@@ -71,21 +71,21 @@ namespace calculator
                             case '!': result = factorial((int)a); break;
                             case 'P': result = factorial((int)b) / factorial((int)(b - a)); break;
                             case 'C': result = factorial((int)b) / (factorial((int)a) * factorial((int)(b - a))); break;
-                            case '^': result = Math.Pow(b,a); break;
+                            case '^': result = Math.Pow(b, a); break;
                             case '%': result = b % a; break;
                             case '+': result = b + a; break;
                             case '-': result = b - a; break;
                             case '*': result = b * a; break;
-                            case '/': if (a == 0) { Exclusion DividedByZeroExclusion = new Exclusion();  DividedByZeroExclusion.DividedByZeroExclusion();} else result = b / a; break;
+                            case '/': if (a == 0) { Exclusion DividedByZeroExclusion = new Exclusion(); DividedByZeroExclusion.DividedByZeroExclusion(); } else result = b / a; break;
                         }
                         temp.Push(result);
                     }
                 }
                 try { return temp.Peek(); }
                 catch (Exception) { throw new SyntaxExclusion(); }
-                
+
             }
-            
+
         }
         static public double Calculate(string input)
         {
@@ -99,15 +99,15 @@ namespace calculator
                 return true;
             return false;
         }
-        
+
         static private bool IsFunction(String s)
         {
-            String[] func = { "sin", "cos", "tg", "asin", "acos", "atg", "sqrt", "ln","lg" };
+            String[] func = { "sin", "cos", "tg", "asin", "acos", "atg", "sqrt", "ln", "lg" };
             if (Array.Exists(func, e => e == s))
                 return true;
             return false;
         }
-        static private String doFunction(String fun,double param)
+        static private String doFunction(String fun, double param)
         {
             switch (fun)
             {
@@ -115,19 +115,19 @@ namespace calculator
 
                 case "sin": return Math.Sin(param).ToString();
 
-                case "tg": if (Math.Abs(param % (2 * Math.PI)) == (Math.PI / 2)) {  Exclusion TgExclusion = new Exclusion(); return TgExclusion.TgExclusion(param); } else return Math.Tan(param).ToString();
-                
+                case "tg": if (Math.Abs(param % (2 * Math.PI)) == (Math.PI / 2)) { Exclusion TgExclusion = new Exclusion(); return TgExclusion.TgExclusion(param); } else return Math.Tan(param).ToString();
+
                 case "asin": if (param < -1 || param > 1) throw new ArcSinCosExclusion(param); else return Math.Asin(param).ToString();
-                
+
                 case "acos": if (param < -1 || param > 1) throw new ArcSinCosExclusion(param); else return Math.Acos(param).ToString();
-                
+
                 case "atg": return Math.Atan(param).ToString();
-                
-                case "sqrt": if (param < 0) { Exclusion SqrtExclusion = new Exclusion(); return SqrtExclusion.SqrtExclusion(param);  } else return Math.Sqrt(param).ToString();
-                
-                case "ln": if (param <= 0) throw new LogExclusion(param); else return Math.Log(param).ToString();
-                
-                case "lg": if (param <= 0) throw new LogExclusion(param); else return Math.Log10(param).ToString();
+
+                case "sqrt": if (param < 0) { Exclusion SqrtExclusion = new Exclusion(); return SqrtExclusion.SqrtExclusion(param); } else return Math.Sqrt(param).ToString();
+
+                case "ln": if (param <= 0) { Exclusion LogExclusion = new Exclusion(); return LogExclusion.LogExclusion(param); } else return Math.Log(param).ToString();
+
+                case "lg": if (param <= 0) { Exclusion LogExclusion = new Exclusion(); return LogExclusion.LogExclusion(param); } else return Math.Log10(param).ToString();
                 default: return "";
             }
         }
@@ -152,11 +152,12 @@ namespace calculator
             int i = 1;
             for (int s = 1; s <= x; s++)
                 i = i * s;
-            if (x < 0) {
+            if (x < 0)
+            {
                 Exclusion FactorialExclusion = new Exclusion();
                 FactorialExclusion.NegativeFactorialExclusion(x);
             }
-             
+
             return i;
         }
         static private string ExpressionGet(string input)
@@ -255,8 +256,8 @@ namespace calculator
         }
         public void removeBackSlash()
         {
-           
-            
+
+
         }
     }
     public class Exclusion : Exception
@@ -288,20 +289,18 @@ namespace calculator
             MessageBox.Show("Ділення на 0 неможливе", type, MessageBoxButtons.OK);
 
         }
-
-    }
-    
-    
-    
-    
-    public class LogExclusion : Exclusion
-    {
-        public LogExclusion(double x)
+        public string LogExclusion(double x)
         {
             this.type = "Математична помилка";
             MessageBox.Show("Log(" + x + ") не існує", type, MessageBoxButtons.OK);
+            return "Математична помилка";
         }
     }
+
+
+
+
+
     public class SyntaxExclusion : Exclusion
     {
         public SyntaxExclusion()
